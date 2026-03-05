@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Divider from '@mui/material/Divider';
-import UnileverLogo from '../../../assets/svg/Unilever.svg';
+import GDTLogo from '../../../assets/GDT With Grey Backgroud.png';
 import { LogOutIcon } from 'lucide-react';
 
 const user = {
@@ -44,24 +44,34 @@ export default function Navbar() {
                 zIndex: (theme) => theme.zIndex.drawer + 1,
             }}
         >
-            <Toolbar variant="dense" sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 }, minHeight: 54 }}>
+            <Toolbar variant="dense" sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 }, maxHeight: 0, pl: { xs: 0, sm: 0 }, py: 0 }}>
+
+                {/* ── GDT Logo (flush left, full height) ── */}
 
                 {/* ── Left: Logo + App Name ── */}
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-                    <img src={UnileverLogo} style={{ width: '24px', height: '24px' }} alt="Unilever Logo" />
+                    <Box
+                        component="img"
+                        src={GDTLogo}
+                        alt="GDT Logo"
+                        sx={{
+                            height: '54px',
+                            width: 'auto',
+                            display: 'block',
+                        }}
+                    />
                     <Box>
                         <Typography
-                            variant="h6"
                             noWrap
                             sx={{
                                 fontWeight: 700,
                                 color: '#fff',
                                 letterSpacing: '0.5px',
                                 lineHeight: 1.1,
-                                fontSize: '1.4rem',
+                                fontSize: '1.2rem',
                             }}
                         >
-                            EWS
+                            Early Warning System
                         </Typography>
                     </Box>
                 </Box>
