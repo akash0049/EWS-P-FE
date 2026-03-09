@@ -24,7 +24,7 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
             onChange={onChange}
             sx={{
                 borderBottom: "1px solid #e5e7eb",
-                minHeight: "40px",
+                minHeight: "20px",
 
                 "& .MuiTabs-indicator": {
                     height: "2px",
@@ -41,9 +41,9 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
                     disableRipple
                     sx={{
                         textTransform: "none",
-                        fontSize: "14px",
+                        fontSize: "12px",
                         fontWeight: 500,
-                        minHeight: "40px",
+                        minHeight: "20px",
                         padding: "8px 16px",
                         color: "#64748b",
 

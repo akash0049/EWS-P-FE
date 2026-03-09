@@ -46,7 +46,7 @@ export default function ManageUserGroups() {
             pt: 3,
             display: "flex",
             flexDirection: "column",
-            gap: 4,
+            gap: 2,
         }}>
 
             <CustomSelectInput
@@ -152,7 +152,6 @@ export default function ManageUserGroups() {
                 </Box>
             )}
 
-            {/* Footer Links */}
             <Box
                 sx={{
                     mt: "auto",
@@ -172,7 +171,7 @@ export default function ManageUserGroups() {
                         alignItems: "center",
                         gap: 1,
                         color: PRIMARY,
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: 500,
                     }}
                 >
@@ -188,7 +187,7 @@ export default function ManageUserGroups() {
                         alignItems: "center",
                         gap: 1,
                         color: PRIMARY,
-                        fontSize: "0.85rem",
+                        fontSize: "0.8rem",
                         fontWeight: 500,
                     }}
                 >

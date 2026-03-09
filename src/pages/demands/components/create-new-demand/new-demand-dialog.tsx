@@ -58,7 +58,7 @@ const NewDemandDialog = ({ open, onClose }: NewDemandDialogProps) => {
                 }}
             >
                 <Box>
-                    <Typography variant="h6" fontWeight={800} letterSpacing="-0.5px" color="text.primary">
+                    <Typography variant="subtitle1" fontWeight={800} letterSpacing="-0.5px" color="text.primary">
                         Create New Demand
                     </Typography>
                     <Typography variant="caption" color="text.secondary" sx={{ mt: 0.25, display: "block" }}>
@@ -69,7 +69,7 @@ const NewDemandDialog = ({ open, onClose }: NewDemandDialogProps) => {
                     onClick={onClose}
                     size="small"
                     sx={{
-                        mt: 0.5,
+                        mt: 0,
                         color: "text.secondary",
                         borderRadius: 1.5,
                         "&:hover": { bgcolor: "action.hover" },

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+import { Box, Button } from "@mui/material";
 import CustomTextInput from "../../../../components/inputs/text-input/text-input";
 
 const PRIMARY = "#0d7ff2";
@@ -13,17 +12,15 @@ export default function NewDemandForm() {
     return (
         <Box
             sx={{
-                px: 4,
-                py: 2,
+                px: 6,
+                py: 3,
                 display: "flex",
                 flexDirection: "column",
                 gap: 3,
             }}
         >
-            {/* Demand Details Section */}
             <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                {/* Section Header */}
-                <Box
+                {/* <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
@@ -43,10 +40,10 @@ export default function NewDemandForm() {
                     >
                         Demand Details
                     </Typography>
-                </Box>
+                </Box> */}
 
                 {/* Form Fields */}
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <Box sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 3 }}>
                     {/* Project Demand Name */}
                     <CustomTextInput
                         label="Project Demand Name"
@@ -103,8 +100,8 @@ export default function NewDemandForm() {
             <Button
                 variant="contained"
                 sx={{
-                    mt: 1.5,
-                    py: 1.3,
+                    mt: 1,
+                    py: 1,
                     borderRadius: 2,
                     fontWeight: 700,
                     textTransform: "none",
