@@ -5,6 +5,7 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
+    DialogActions,
     IconButton,
     Button
 } from "@mui/material";
@@ -29,8 +30,9 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
             fullWidth
             PaperProps={{
                 sx: {
-                    height: "54vh",
+                    height: "50vh",
                     borderRadius: 3,
+                    p: 2,
                     overflow: "visible",
                     boxShadow: "0 24px 64px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.08)",
                 },
@@ -42,9 +44,7 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "flex-start",
-                    pb: 1,
-                    pt: 2.5,
-                    px: 3,
+                    p: 0,
                     borderBottom: "1px solid",
                     borderColor: "divider",
                 }}
@@ -69,7 +69,7 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
             </DialogTitle>
 
             {/* ── Dialog Content ── */}
-            <DialogContent sx={{ mx: 2, mt: 1 }}>
+            <DialogContent>
                 <Box
                     sx={{
                         py: 2,
@@ -96,7 +96,7 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                         onChange={(value) => setObjectName(value != null ? String(value) : "")}
                     />
 
-                    <Box sx={{
+                    {/* <Box sx={{
                         display: 'flex',
                         justifyContent: 'end',
                         alignItems: 'center',
@@ -114,9 +114,23 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                         >
                             Submit
                         </Button>
-                    </Box>
+                    </Box> */}
                 </Box>
             </DialogContent>
+            <DialogActions sx={{ p: 0, my: 0, mx: 4 }}>
+                <Button
+                    variant="outlined"
+                    onClick={() => { }}
+                >
+                    Close
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => { }}
+                >
+                    Submit
+                </Button>
+            </DialogActions>
         </Dialog>
     );
 };

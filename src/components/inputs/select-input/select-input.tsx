@@ -245,7 +245,7 @@ const CustomSelectInput = forwardRef<HTMLDivElement, CustomSelectInputProps>(
                             boxShadow: (theme) =>
                                 `0 0 0 2px ${theme.palette.primary.main}40`,
                         },
-                        minHeight: "32px"
+                        minHeight: "35px"
                     }}
                 >
                     {/* Displayed value / placeholder */}

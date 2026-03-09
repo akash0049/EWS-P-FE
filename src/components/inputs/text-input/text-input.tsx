@@ -130,8 +130,8 @@ const CustomTextInput = forwardRef<HTMLDivElement, CustomTextInputProps>(
                         },
                         /* ── custom size: between MUI small (~40px) and medium (~56px) ── */
                         "& .MuiOutlinedInput-input": {
-                            paddingTop: "6px",
-                            paddingBottom: "6px",
+                            // paddingTop: "6px",
+                            // paddingBottom: "6px",
                             fontSize: "0.8rem",
                             "&::placeholder": {
                                 fontSize: "0.8rem",
