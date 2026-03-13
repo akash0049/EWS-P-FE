@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MaterialTable from "../../components/tables/material-table/material-table";
 import { type MRT_ColumnDef } from "material-react-table";
 import {
     Box,
@@ -16,7 +15,9 @@ import {
     Globe,
 } from "lucide-react";
 import { TrendingUp } from "@mui/icons-material";
+import MaterialTable from "../../components/tables/material-table/material-table";
 import NewDemandDialog from "./components/create-new-demand/new-demand-dialog";
+import { FilePlusCorner } from 'lucide-react';
 
 type Status = "Active" | "Inactive";
 
@@ -269,6 +270,7 @@ const Demands = () => {
                 <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                     <Button
                         variant="contained"
+                        startIcon={<FilePlusCorner size={16} />}
                         onClick={() => setCreateOpen(true)}
                     >
                         Create New Demand

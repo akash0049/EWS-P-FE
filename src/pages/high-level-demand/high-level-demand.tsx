@@ -14,6 +14,7 @@ import DemandDetails from "./components/demand-details";
 import { DeleteOutline, ArrowCircleRight } from "@mui/icons-material";
 import AddObjectDialog from "./components/add-object";
 import CustomIconButton from "../../components/buttons/icon-button/icon-button";
+import { Save, BookText, FilePlus } from 'lucide-react';
 
 const ALL_DATA: {}[] = [
     {
@@ -160,18 +161,21 @@ const HighLevelDemand = () => {
                 <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                     <Button
                         variant="contained"
+                        startIcon={<FilePlus size={16} />}
                         onClick={() => setOpenAddObject(true)}
                     >
                         Add Object
                     </Button>
                     <Button
                         variant="contained"
+                        startIcon={<BookText size={16} />}
                         onClick={() => setOpenDemandDetails(true)}
                     >
                         Demand Details
                     </Button>
                     <Button
                         variant="contained"
+                        startIcon={<Save size={16} />}
                         onClick={() => { }}
                     >
                         Save Requirement

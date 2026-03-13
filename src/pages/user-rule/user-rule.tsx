@@ -9,6 +9,7 @@ import { AlarmOnOutlined } from "@mui/icons-material";
 import MaterialTable from "../../components/tables/material-table/material-table";
 import AddNewRule from "./components/add-new-rule/add-new-rule";
 import ScheduleRule from "./components/schedule-rule/schedule-rule";
+import { CalendarCheck, CirclePlus } from 'lucide-react';
 
 const ALL_DATA: {}[] = [
     {
@@ -83,7 +84,7 @@ const UserRule = () => {
             {
                 accessorKey: "userRuleId",
                 header: "User Rule ID",
-                size: 100,
+                size: 120,
                 Cell: ({ row }) => (
                     <Box sx={{
                         display: 'flex',
@@ -101,6 +102,7 @@ const UserRule = () => {
                         >
                             {row.original.userRuleId}
                         </Typography>
+
                         {row.original.scheduled &&
                             <AlarmOnOutlined fontSize="small" color="success" />
                         }
@@ -197,12 +199,14 @@ const UserRule = () => {
                 <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                     <Button
                         variant="contained"
+                        startIcon={<CirclePlus size={16} />}
                         onClick={() => setOpenAddRule(true)}
                     >
                         Add New Rule
                     </Button>
                     <Button
                         variant="contained"
+                        startIcon={<CalendarCheck size={16} />}
                         disabled={Object.keys(rowSelection).length === 0}
                         onClick={() => setOpenScheduleRule(true)}
                     >
