@@ -10,7 +10,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
-import { FileText, Languages, BookOpen, ChevronsLeft, ChevronsRight, ScrollText } from 'lucide-react';
+import {
+    FileText,
+    Languages,
+    // BookOpen, 
+    ChevronsLeft,
+    ChevronsRight,
+    ScrollText
+} from 'lucide-react';
 
 export const DRAWER_WIDTH = 220;
 export const DRAWER_COLLAPSED_WIDTH = 60;

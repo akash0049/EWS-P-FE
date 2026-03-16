@@ -71,7 +71,7 @@ const CustomTextInput = forwardRef<HTMLDivElement, CustomTextInputProps>(
                             fontWeight: 500,
                             color: disabled ? "text.disabled" : "text.primary",
                             mb: "4px",
-                            lineHeight: 1.2,
+                            lineHeight: 1.4,
                             userSelect: "none",
                         }}
                     >
@@ -123,6 +123,7 @@ const CustomTextInput = forwardRef<HTMLDivElement, CustomTextInputProps>(
                             "& fieldset": { top: 0 },
                             borderRadius: "4px",
                             backgroundColor: "#FFFFFF",
+                            minHeight: "35px",
 
                             "&.MuiInputBase-multiline": {
                                 padding: "8px 14px",
@@ -135,6 +136,9 @@ const CustomTextInput = forwardRef<HTMLDivElement, CustomTextInputProps>(
                         },
                         "& .MuiOutlinedInput-input": {
                             fontSize: "0.8rem",
+                            padding: "7.5px 14px",
+                            height: "20px",
+                            boxSizing: "border-box",
                             "&::placeholder": {
                                 fontSize: "0.8rem",
                             },
