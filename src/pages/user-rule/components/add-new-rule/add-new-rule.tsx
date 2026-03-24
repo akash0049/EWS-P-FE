@@ -14,6 +14,7 @@ import CustomTextInput from "../../../../components/inputs/text-input/text-input
 interface NewDemandDialogProps {
     open: boolean;
     onClose: (value: boolean) => void;
+    onAdd?: (newRule: any) => void;
 }
 
 const RuleTypeList = [
@@ -27,7 +28,7 @@ const RuleTypeList = [
     { value: "Date Format Check (Date & Time) [42]", label: "Date Format Check (Date & Time) [42]" },
 ];
 
-const AddNewRule = ({ open, onClose }: NewDemandDialogProps) => {
+const AddNewRule = ({ open, onClose, onAdd }: NewDemandDialogProps) => {
     const [ruleType, setRuleType] = useState<string>("");
     const [ruleName, setRuleName] = useState<string>("");
     const [ruleDescription, setRuleDescription] = useState<string>("");
@@ -87,7 +88,13 @@ const AddNewRule = ({ open, onClose }: NewDemandDialogProps) => {
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => onClose(false)}
+                        onClick={() => {
+                            if (ruleType && ruleName && primaryObject) {
+                                onAdd?.({ ruleType, ruleName, primaryObject, scheduled: false });
+                                onClose(false);
+                            }
+                        }}
+                        disabled={!ruleType || !ruleName || !primaryObject}
                     >
                         Submit
                     </Button>

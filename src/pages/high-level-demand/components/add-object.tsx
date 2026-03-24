@@ -9,13 +9,14 @@ import {
     IconButton,
     Button
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Close, Delete as DeleteIcon, Add as AddIcon } from "@mui/icons-material";
 import CustomSelectInput from "../../../components/inputs/select-input/select-input";
 
 /* ── Dialog Props ── */
 interface AddObjectDialogProps {
     open: boolean;
     onClose: (open: boolean) => void;
+    onAdd?: (newObjects: any[]) => void;
 }
 
 const XOPS_List = [
@@ -34,9 +35,22 @@ const OBJECT_LIST = [
     { value: "Aggregateddata[TOB58568]", label: "Aggregateddata[TOB58568]" },
 ];
 
-const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
-    const [xops, setXops] = useState("");
-    const [objectName, setObjectName] = useState("");
+const AddObjectDialog = ({ open, onClose, onAdd }: AddObjectDialogProps) => {
+    const [rows, setRows] = useState([{ id: Date.now(), xops: "", objectName: "" }]);
+
+    const handleAddRow = () => {
+        setRows([...rows, { id: Date.now(), xops: "", objectName: "" }]);
+    };
+
+    const handleRemoveRow = (id: number) => {
+        if (rows.length > 1) {
+            setRows(rows.filter((r) => r.id !== id));
+        }
+    };
+
+    const updateRow = (id: number, field: "xops" | "objectName", value: string) => {
+        setRows(rows.map((r) => (r.id === id ? { ...r, [field]: value } : r)));
+    };
 
     return (
         <Dialog
@@ -45,11 +59,11 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                 if (reason === "backdropClick") return; // prevent close on outside click
                 onClose(false);
             }}
-            maxWidth="xs"
+            maxWidth="md"
             fullWidth
             PaperProps={{
                 sx: {
-                    height: "50vh",
+                    height: "90vh",
                     borderRadius: 3,
                     p: 2,
                     overflow: "visible",
@@ -99,42 +113,44 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                         gap: 3,
                     }}
                 >
-                    <CustomSelectInput
-                        label="XOps"
-                        placeholder="Select a xops"
-                        required
-                        options={XOPS_List}
-                        value={xops}
-                        onChange={(value) => setXops(value != null ? String(value) : "")}
-                    />
-                    <CustomSelectInput
-                        label="Object Name"
-                        placeholder="Select a object name"
-                        required
-                        options={OBJECT_LIST}
-                        value={objectName}
-                        onChange={(value) => setObjectName(value != null ? String(value) : "")}
-                    />
+                    {rows.map((row) => (
+                        <Box key={row.id} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                            <Box sx={{ flex: 1 }}>
+                                <CustomSelectInput
+                                    label="XOps"
+                                    placeholder="Select a xops"
+                                    required
+                                    options={XOPS_List}
+                                    value={row.xops}
+                                    onChange={(value) => updateRow(row.id, "xops", value != null ? String(value) : "")}
+                                />
+                            </Box>
+                            <Box sx={{ flex: 1 }}>
+                                <CustomSelectInput
+                                    label="Object Name"
+                                    placeholder="Select a object name"
+                                    required
+                                    options={OBJECT_LIST}
+                                    value={row.objectName}
+                                    onChange={(value) => updateRow(row.id, "objectName", value != null ? String(value) : "")}
+                                />
+                            </Box>
+                            {rows.length > 1 && (
+                                <IconButton color="error" onClick={() => handleRemoveRow(row.id)} sx={{ mt: 3 }}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            )}
+                        </Box>
+                    ))}
 
-                    {/* <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'end',
-                        alignItems: 'center',
-                        gap: 1
-                    }}>
-                        <Button
-                            variant="outlined"
-                            onClick={() => { }}
-                        >
-                            Close
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={() => { }}
-                        >
-                            Submit
-                        </Button>
-                    </Box> */}
+                    <Button
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        onClick={handleAddRow}
+                        sx={{ alignSelf: 'flex-start' }}
+                    >
+                        Add Another Object
+                    </Button>
                 </Box>
             </DialogContent>
             <DialogActions sx={{ p: 0, my: 0, mx: 4 }}>
@@ -147,7 +163,30 @@ const AddObjectDialog = ({ open, onClose }: AddObjectDialogProps) => {
                 </Button>
                 <Button
                     variant="contained"
-                    onClick={() => { }}
+                    onClick={() => {
+                        const validRows = rows.filter(r => r.xops && r.objectName);
+                        if (validRows.length > 0) {
+                            const newObjects = validRows.map(row => {
+                                const keyMatch = row.objectName.match(/\[(.*?)\]/);
+                                const key = keyMatch ? keyMatch[1] : `NEW_${Math.floor(Math.random() * 1000)}`;
+                                const name = row.objectName.replace(/\[.*?\]/, "").trim();
+
+                                return {
+                                    objectKey: key,
+                                    objectName: name,
+                                    objectPath: `[BDLMOUNT]/BusinessDataLake/${row.xops}/${name}`,
+                                    metadata: "N",
+                                };
+                            });
+
+                            if (onAdd) {
+                                onAdd(newObjects);
+                            }
+                            setRows([{ id: Date.now(), xops: "", objectName: "" }]);
+                            onClose(false);
+                        }
+                    }}
+                    disabled={!rows.some(r => r.xops && r.objectName)}
                 >
                     Submit
                 </Button>

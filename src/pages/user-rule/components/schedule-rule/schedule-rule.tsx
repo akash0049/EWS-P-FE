@@ -18,6 +18,7 @@ import CustomTimePicker from "../../../../components/inputs/date-time-pickers/ti
 interface ScheduleRuleProps {
     open: boolean;
     onClose: (value: boolean) => void;
+    onSubmit?: () => void;
 }
 
 const getNumberList = (length: number) => Array.from({ length: length }, (_, i) => ({
@@ -25,7 +26,7 @@ const getNumberList = (length: number) => Array.from({ length: length }, (_, i) 
     label: String(i + 1),
 }));
 
-const ScheduleRule = ({ open, onClose }: ScheduleRuleProps) => {
+const ScheduleRule = ({ open, onClose, onSubmit }: ScheduleRuleProps) => {
     const [scheduleType, setScheduleType] = useState<string>("");
 
     const [scheduleFreq, setScheduleFreq] = useState<string>("");
@@ -91,7 +92,13 @@ const ScheduleRule = ({ open, onClose }: ScheduleRuleProps) => {
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => onClose(false)}
+                        onClick={() => {
+                            if (scheduleType === 'ingestionDependency' || scheduleFreq) {
+                                onSubmit?.();
+                                onClose(false);
+                            }
+                        }}
+                        disabled={!scheduleType || (scheduleType === 'custom' && !scheduleFreq)}
                     >
                         Submit
                     </Button>

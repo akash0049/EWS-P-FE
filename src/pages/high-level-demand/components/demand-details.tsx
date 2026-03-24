@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Drawer, Typography, Button, Divider, Link } from "@mui/material";
 import CustomSelectInput from "../../../components/inputs/select-input/select-input";
 import CustomTextInput from "../../../components/inputs/text-input/text-input";
+import CustomSnackbar from "../../../components/snackbar/custom-snackbar";
 
 interface Props {
     open: boolean;
@@ -37,6 +38,55 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
     const [functionalSME, setFunctionalSME] = useState("");
     const [resolverGroupName, setResolverGroupName] = useState("");
     const [userGroup, setUserGroup] = useState("");
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showError, setShowError] = useState(false);
+
+    useEffect(() => {
+        if (jiraId === "DDA-890") {
+            setJiraDescription("Implement new backend services for demand processing.");
+        } else if (jiraId === "DDA-1024") {
+            setJiraDescription("Fix UI bugs in the demand details drawer.");
+        } else if (jiraId === "DDA-3465") {
+            setJiraDescription("Update database schema for high-level demands.");
+        } else {
+            setJiraDescription("");
+        }
+    }, [jiraId]);
+
+    useEffect(() => {
+        if (resolverGroupName) {
+            setUserGroup(`${resolverGroupName}_Users`);
+        } else {
+            setUserGroup("");
+        }
+    }, [resolverGroupName]);
+
+    const handleSave = () => {
+        if (!jiraId || !demandDescription || !market || !usecase || !benefits || !demandOwner || !demandSPOC || !functionalSME || !resolverGroupName) {
+            setShowError(true);
+            return;
+        }
+
+        const payload = {
+            jiraId,
+            jiraDescription,
+            demandDescription,
+            market,
+            usecase,
+            benefits,
+            demandOwner,
+            demandSPOC,
+            functionalSME,
+            resolverGroupName,
+            userGroup
+        };
+        console.log("Saving Demand Details:", payload);
+        setShowSuccess(true);
+        setTimeout(() => {
+            setShowSuccess(false);
+            toggleDrawer(false);
+        }, 1500);
+    };
 
     return (
         <Drawer
@@ -87,7 +137,7 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={() => { }}
+                        onClick={handleSave}
                     >
                         Save
                     </Button>
@@ -277,6 +327,20 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     }}
                 />
             </Box>
+
+            <CustomSnackbar
+                open={showSuccess}
+                message="Demand Details saved successfully!"
+                severity="success"
+                onClose={() => setShowSuccess(false)}
+            />
+            <CustomSnackbar
+                open={showError}
+                message="Please fill in all required fields before saving."
+                severity="error"
+                autoHideDuration={4000}
+                onClose={() => setShowError(false)}
+            />
         </Drawer>
 
     );

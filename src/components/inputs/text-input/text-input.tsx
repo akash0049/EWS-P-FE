@@ -126,7 +126,7 @@ const CustomTextInput = forwardRef<HTMLDivElement, CustomTextInputProps>(
                             minHeight: "35px",
 
                             "&.MuiInputBase-multiline": {
-                                padding: "8px 14px",
+                                padding: "0px",
                             },
                             // Visual cue for readOnly state (slightly greyed out)
                             "&.Mui-readOnly": {

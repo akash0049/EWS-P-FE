@@ -15,14 +15,16 @@ import {
 import CustomTabs from "../../../../components/tabs/custom-tabs";
 import CreateNewDemand from "./create-new-demand";
 import ManageUserGroups from "./manage-user-groups";
+import type { Demand } from "../../constants/types";
 
 /* ── Dialog Props ── */
 interface NewDemandDialogProps {
     open: boolean;
     onClose: () => void;
+    onCreate: (demand: Demand) => void;
 }
 
-const NewDemandDialog = ({ open, onClose }: NewDemandDialogProps) => {
+const NewDemandDialog = ({ open, onClose, onCreate }: NewDemandDialogProps) => {
     const [activeTab, setActiveTab] = useState(0);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -92,7 +94,7 @@ const NewDemandDialog = ({ open, onClose }: NewDemandDialogProps) => {
                         { label: "Manage User Groups", icon: <UserCog size={12} /> },
                     ]}
                 />
-                {activeTab === 0 && <CreateNewDemand />}
+                {activeTab === 0 && <CreateNewDemand onCreate={onCreate} />}
                 {activeTab === 1 && <ManageUserGroups />}
             </DialogContent>
         </Dialog>

@@ -110,6 +110,205 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                 py: 1.2,
             },
         },
+        /* ── Global search input ── */
+        muiSearchTextFieldProps: {
+            size: 'small',
+            variant: 'outlined',
+            placeholder: 'Search…',
+            InputProps: {
+                sx: {
+                    height: '30px',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500,
+                    borderRadius: '6px',
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'divider',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#005EEF',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#005EEF',
+                        borderWidth: '1.5px',
+                    },
+                    '& .MuiInputAdornment-root svg': {
+                        fontSize: '16px',
+                        color: 'text.secondary',
+                    },
+                },
+            },
+            inputProps: {
+                sx: {
+                    py: '4px',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                },
+            },
+        },
+        /* ── Column-level filter inputs (text) ── */
+        muiFilterTextFieldProps: {
+            variant: 'standard',
+            sx: {
+                /* wrapper input root */
+                '& .MuiInputBase-root': {
+                    height: '28px',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500,
+                    borderRadius: '6px',
+                },
+                /* native <input> inner padding + font */
+                '& .MuiInputBase-input': {
+                    padding: '3px 8px',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500,
+                },
+                /* default border */
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(0,0,0,0.18)',
+                },
+                /* hover */
+                '& .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#005EEF',
+                },
+                /* focused */
+                '& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#005EEF',
+                    borderWidth: '1.5px',
+                },
+                /* clear icon */
+                '& .MuiInputAdornment-root svg': {
+                    fontSize: '14px',
+                    color: 'text.secondary',
+                },
+            },
+        },
+        /* ── Column-level filter select (select / multi-select variants) ── */
+        muiFilterSelectProps: {
+            MenuProps: {
+                PaperProps: {
+                    elevation: 4,
+                    sx: {
+                        borderRadius: '6px',
+                        mt: '4px',
+                    },
+                },
+                sx: {
+                    '& .MuiButtonBase-root': {
+                        fontSize: '11px',
+                        px: 1.5,
+                        py: '6px',
+                        minHeight: '28px',
+                        lineHeight: 1.4,
+                        transition: 'background-color 0.15s',
+                        '&:hover': {
+                            backgroundColor: 'action.hover',
+                        },
+                        '&.Mui-selected': {
+                            backgroundColor: 'primary.main',
+                            color: 'primary.contrastText',
+                            '&:hover': {
+                                backgroundColor: 'primary.dark',
+                            },
+                        },
+                        '&.Mui-selected.Mui-focusVisible': {
+                            backgroundColor: 'primary.main',
+                        },
+                    },
+                },
+            },
+            sx: {
+                minHeight: '28px',
+                fontSize: 'clamp(8px, 10px, 12px)',
+                fontWeight: 500,
+                borderRadius: '6px',
+                '& .MuiSelect-select': {
+                    padding: '3px 8px',
+                    fontSize: '11px',
+                    fontWeight: 500,
+                    lineHeight: '22px',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '4px',
+                    alignItems: 'center',
+                },
+                '& .MuiChip-root': {
+                    height: '18px',
+                    fontSize: '10px',
+                    borderRadius: '4px',
+                    backgroundColor: 'rgba(0, 94, 239, 0.1)',
+                    color: '#005EEF',
+                    margin: 0,
+                },
+                '& .MuiChip-label': {
+                    px: '6px',
+                    py: 0,
+                    fontWeight: 600,
+                },
+                '& .MuiChip-deleteIcon': {
+                    fontSize: '12px',
+                    color: '#005EEF',
+                    '&:hover': {
+                        color: '#0047B3', // darker shade for hover
+                    },
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'rgba(0,0,0,0.18)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#005EEF',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#005EEF',
+                    borderWidth: '1.5px',
+                },
+            },
+        },
+        /* ── Top toolbar container ── */
+        muiTopToolbarProps: {
+            sx: {
+                '& .MuiInputBase-root': {
+                    height: '30px',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500,
+                    borderRadius: '6px',
+                },
+                /* Show/Hide columns + filter list icon buttons */
+                '& .MuiIconButton-root': {
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '6px',
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    color: 'text.secondary',
+                    mr: '4px',
+                    '&:hover': {
+                        borderColor: '#005EEF',
+                        color: '#005EEF',
+                        bgcolor: 'rgba(0,94,239,0.05)',
+                    },
+                    '& svg': { fontSize: '18px' },
+                },
+            },
+        },
+        /* ── Show / Hide columns popover ── */
+        muiColumnVisibilityMenuItemProps: {
+            sx: {
+                fontSize: 'clamp(9px, 11px, 13px)',
+                fontWeight: 500,
+                py: 0.5,
+                minHeight: 'unset',
+                '& .MuiSwitch-root': { transform: 'scale(0.8)' },
+                '& .MuiSwitch-track': { borderRadius: '10px' },
+                '& .MuiSwitch-thumb': { width: '12px', height: '12px' },
+                '& .MuiFormControlLabel-label': {
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500,
+                },
+                '&:hover': {
+                    bgcolor: 'rgba(0,94,239,0.05)',
+                    color: '#005EEF',
+                },
+            },
+        },
         renderBottomToolbar: ({ table }) => {
             const { pageIndex, pageSize } = table.getState().pagination;
             const totalRows = table.getFilteredRowModel().rows.length;

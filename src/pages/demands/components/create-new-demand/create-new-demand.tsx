@@ -1,13 +1,34 @@
 import { useState } from "react";
 import { Box, Button } from "@mui/material";
 import CustomTextInput from "../../../../components/inputs/text-input/text-input";
+import type { Demand } from "../../constants/types";
 
 const PRIMARY = "#0d7ff2";
 
-export default function NewDemandForm() {
+interface CreateNewDemandProps {
+    onCreate?: (demand: Demand) => void;
+}
+
+export default function NewDemandForm({ onCreate }: CreateNewDemandProps) {
     const [demandName, setDemandName] = useState("");
     const [userGroup, setUserGroup] = useState("");
     const [groupEmail, setGroupEmail] = useState("");
+
+    const handleSubmit = () => {
+        if (!demandName || !userGroup) return;
+        
+        if (onCreate) {
+            onCreate({
+                name: demandName,
+                status: "Active",
+                description: `Managed by ${userGroup} ${groupEmail ? `(${groupEmail})` : ''}`,
+                market: "Global",
+            });
+            setDemandName("");
+            setUserGroup("");
+            setGroupEmail("");
+        }
+    };
 
     return (
         <Box
@@ -97,7 +118,11 @@ export default function NewDemandForm() {
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center', gap: 2 }}>
-                <Button variant="contained">
+                <Button 
+                    variant="contained" 
+                    onClick={handleSubmit} 
+                    disabled={!demandName || !userGroup}
+                >
                     Create Demand
                 </Button>
             </Box>

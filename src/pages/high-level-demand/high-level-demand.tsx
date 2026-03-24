@@ -1,136 +1,31 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { type MRT_ColumnDef } from "material-react-table";
+
 import {
     Box,
     Button,
     Typography,
-    Chip,
-    Tooltip,
-    // Alert
+    IconButton,
+    Tooltip
 } from "@mui/material";
 import MaterialTable from "../../components/tables/material-table/material-table";
 import DemandDetails from "./components/demand-details";
-import { DeleteOutline, ArrowCircleRight } from "@mui/icons-material";
+import { ArrowCircleRight, DeleteOutlineOutlined } from "@mui/icons-material";
 import AddObjectDialog from "./components/add-object";
 import CustomIconButton from "../../components/buttons/icon-button/icon-button";
+import CustomSnackbar from "../../components/snackbar/custom-snackbar";
 import { Save, BookText, FilePlus } from 'lucide-react';
 
-const ALL_DATA: {}[] = [
-    {
-        objectKey: "TOB41203",
-        objectName: "OTMLocation",
-        objectPath: "[BDLMOUNT]/BusinessDataLake/SC/ReferenceObject/OTMLocation/Processed_Parq",
-        metadata: "Y",
-    },
-    {
-        objectKey: "TOB20012",
-        objectName: "Plant",
-        objectPath: "[BDLMOUNT]/BusinessDataLake/SC/ReferenceObject/Plant/Processed_Parquet",
-        metadata: "N",
-    },
-    {
-        objectKey: "TOB30014",
-        objectName: "PurchaseDocumentHeader",
-        objectPath: "[BDLMOUNT]/BusinessDataLake/SC/TransactionObject/PurchaseDocumentHeader",
-        metadata: "Y",
-    },
-    {
-        objectKey: "TOB42901",
-        objectName: "CostCenter",
-        objectPath: "[BDLMOUNT]/BusinessDataLake/HR/Hierarchies/CostCenter/Processed",
-        metadata: "Y",
-    },
-    {
-        objectKey: "TOB41909",
-        objectName: "OTMShipmentStatus",
-        objectPath: "[BDLMOUNT]/BusinessDataLake/SC/TransactionObject/OTMShipmentStatus/Process",
-        metadata: "Y",
-    },
-];
+import { columns } from "./constants/columns";
+import { ALL_DATA } from "./constants/data";
 
 const HighLevelDemand = () => {
     const navigate = useNavigate();
 
     const [openDemandDetails, setOpenDemandDetails] = useState(false);
     const [openAddObject, setOpenAddObject] = useState(false);
-
-    const columns = useMemo<MRT_ColumnDef<any>[]>(
-        () => [
-            {
-                accessorKey: "objectKey",
-                header: "Object Key",
-                size: 100,
-            },
-            {
-                accessorKey: "objectName",
-                header: "Object Name",
-                size: 100,
-            },
-            {
-                accessorKey: "objectPath",
-                header: "Object Path",
-                size: 100,
-                Cell: ({ cell }) => {
-                    const full = cell.getValue<string>();
-                    const preview = full.length > 50 ? full.slice(0, 50) + '…' : full;
-                    return (
-                        <Tooltip title={full} placement="top" arrow>
-                            <Typography
-                                color="text.secondary"
-                                sx={{
-                                    whiteSpace: 'nowrap',
-                                    cursor: 'default',
-                                    fontSize: 'clamp(9px, 11px, 13px)',
-                                    fontWeight: 500
-                                }}
-                            >
-                                {preview}
-                            </Typography>
-                        </Tooltip>
-                    );
-                }
-            },
-            {
-                accessorKey: "metadata",
-                header: "Available in Metadata",
-                size: 220,
-                Cell: ({ cell }) => {
-                    const value = cell.getValue<string>();
-
-                    return (
-                        <Chip
-                            label={value}
-                            size="small"
-                            sx={{
-                                fontWeight: 700,
-                                fontSize: "0.75rem",
-                                borderRadius: "6px",
-                                bgcolor: value === "Y" ? "#047857" : "#B91C1C",
-                                color: "#FFFFFF",
-                                border: "1px solid",
-                                height: 30,
-                                minWidth: 32,
-                            }}
-                        />
-                    );
-                },
-            },
-            {
-                id: "actions",
-                header: "Actions",
-                enableSorting: false,
-                enableColumnFilter: false,
-                size: 100,
-                Cell: () => (
-                    <Button size="small" sx={{ color: 'grey' }}>
-                        <DeleteOutline />
-                    </Button>
-                ),
-            },
-        ],
-        []
-    );
+    const [tableData, setTableData] = useState(ALL_DATA);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, height: "100%" }}>
@@ -176,7 +71,11 @@ const HighLevelDemand = () => {
                     <Button
                         variant="contained"
                         startIcon={<Save size={16} />}
-                        onClick={() => { }}
+                        onClick={() => {
+                            console.log("Saving Requirement:", tableData);
+                            setShowSuccess(true);
+                            setTimeout(() => setShowSuccess(false), 2000);
+                        }}
                     >
                         Save Requirement
                     </Button>
@@ -191,8 +90,49 @@ const HighLevelDemand = () => {
             <Box sx={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <MaterialTable
                     columns={columns}
-                    data={ALL_DATA}
-                    options={{ enableTopToolbar: true }}
+                    data={tableData}
+                    options={{
+                        enableTopToolbar: true,
+                        enableEditing: true,
+                        editDisplayMode: "row",
+                        enableRowActions: true,
+                        positionActionsColumn: "last",
+                        onEditingRowSave: ({ table, values }) => {
+                            const newData = tableData.map((item: any) =>
+                                item.objectKey === values.objectKey ? values : item
+                            );
+                            setTableData(newData);
+                            table.setEditingRow(null);
+                        },
+                        renderRowActions: ({ row }) => (
+                            <Tooltip arrow placement="top" title="Delete">
+                                <IconButton
+                                    size="small"
+                                    onClick={() => {
+                                        const newData = tableData.filter((item: any) => item.objectKey !== row.original.objectKey);
+                                        setTableData(newData);
+                                    }}
+                                    sx={{
+                                        width: '28px',
+                                        height: '28px',
+                                        borderRadius: '6px',
+                                        border: '1px solid',
+                                        borderColor: 'divider',
+                                        color: '#DC2626',
+                                        bgcolor: 'rgba(220, 38, 38, 0.04)',
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': {
+                                            borderColor: '#DC2626',
+                                            bgcolor: 'rgba(220, 38, 38, 0.12)',
+                                        },
+                                        '& svg': { fontSize: '16px' }
+                                    }}
+                                >
+                                    <DeleteOutlineOutlined />
+                                </IconButton>
+                            </Tooltip>
+                        ),
+                    }}
                 />
             </Box>
             {/* 
@@ -236,7 +176,15 @@ const HighLevelDemand = () => {
             `}</style>
 
             <DemandDetails open={openDemandDetails} toggleDrawer={setOpenDemandDetails} />
-            <AddObjectDialog open={openAddObject} onClose={setOpenAddObject} />
+            <AddObjectDialog open={openAddObject} onClose={setOpenAddObject} onAdd={(newObjs) => setTableData([...tableData, ...newObjs])} />
+
+            <CustomSnackbar
+                open={showSuccess}
+                message="Requirement saved successfully!"
+                severity="success"
+                autoHideDuration={2000}
+                onClose={() => setShowSuccess(false)}
+            />
         </Box>
     );
 };

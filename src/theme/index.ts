@@ -25,7 +25,7 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: "'Unilever Desire', sans-serif",
+        fontFamily: "Unilever Desire",
         h1: { fontWeight: 700 },
         h2: { fontWeight: 700 },
         h3: { fontWeight: 600 },
@@ -38,7 +38,7 @@ const theme = createTheme({
         body2: { fontWeight: 400 },
         button: {
             fontSize: 'clamp(9px, 11px, 13px)',
-            fontWeight: 600
+            fontWeight: 600,
         },
     },
     components: {
