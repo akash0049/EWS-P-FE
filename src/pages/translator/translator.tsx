@@ -18,7 +18,7 @@ const Translator = () => {
     const [userRule, setUserRule] = useState<string>("");
     const [jiraId, setJiraId] = useState<string>("");
     const [ruleType, setRuleType] = useState<string>("");
-    
+
     // Bottom left states
     const [estRunCost, setEstRunCost] = useState<string>("");
     const [maxExecTime, setMaxExecTime] = useState<string>("");
@@ -26,7 +26,7 @@ const Translator = () => {
 
     // Right side states
     const [xops, setXops] = useState<string>("");
-    
+
     // Meta read-only states
     const [metaWhereRead, setMetaWhereRead] = useState<string>("");
     const [metaJoinRead, setMetaJoinRead] = useState<string>("");
@@ -45,7 +45,7 @@ const Translator = () => {
             setMaxExecTime("12 mins");
             setStatus("Active");
             setXops("Commercial");
-            
+
             setMetaWhereRead("source_system = 'SAP' AND region = 'NA'");
             setMetaJoinRead("INNER JOIN sales_data ON source.id = sales.id");
             setMetaFilterRead("amount > 1000");
@@ -58,7 +58,7 @@ const Translator = () => {
             setMetaWhereRead("");
             setMetaJoinRead("");
             setMetaFilterRead("");
-            
+
             setMetaWhereEdit("");
             setMetaJoinEdit("");
             setMetaFilterEdit("");
@@ -244,7 +244,7 @@ const Translator = () => {
                 {/* Right Column: Metadata and Details */}
                 <Grid size={{ xs: 12, md: 9 }} sx={{ height: "100%" }}>
                     <Card variant="outlined" sx={{ p: 0, height: "100%", overflowY: "auto", display: "flex", flexDirection: "column" }}>
-                        
+
                         {/* Sticky Action Topbar */}
                         <Box
                             sx={{
@@ -289,6 +289,7 @@ const Translator = () => {
                                     Generate Query
                                 </Button>
                                 <CustomIconButton
+                                    size="medium"
                                     title="Click here to Configure Rules"
                                     icon={<RefreshCcw fontSize="medium" />}
                                     onClick={() => { }}
@@ -301,173 +302,173 @@ const Translator = () => {
                                 <Grid size={{ xs: 12 }}>
                                     <Typography variant="body2" fontWeight={600}>Following are Data Owner Inputs:</Typography>
                                 </Grid>
-                            <Grid size={{ xs: 3 }}>
-                                <CustomSelectInput
-                                    label="Select XOps"
-                                    placeholder="XOps"
-                                    options={[
-                                        { value: "Commercial", label: "Commercial" },
-                                        { value: "Consumer", label: "Consumer" },
-                                        { value: "Customer Development", label: "Customer Development" },
-                                        { value: "Customer Operations", label: "Customer Operations" },
-                                        { value: "People", label: "People" },
-                                        { value: "Supply Chat & R&D", label: "Supply Chat & R&D" },
-                                        { value: "Unknown", label: "Unknown" },
-                                    ]}
-                                    value={xops}
-                                    onChange={(value) => setXops(value != null ? String(value) : "")}
-                                />
-                            </Grid>
-                            <Grid size={{ xs: 3 }}>
-                                <CustomSelectInput
-                                    label="Object key 2"
-                                    placeholder="Object key 2"
-                                    disabled
-                                    options={[]}
-                                    value={undefined}
-                                    onChange={() => { }}
-                                />
-                            </Grid>
-                            <Grid size={{ xs: 3 }}>
-                                <CustomSelectInput
-                                    label="Object key 3"
-                                    placeholder="Object key 3"
-                                    disabled
-                                    options={[]}
-                                    value={undefined}
-                                    onChange={() => { }}
-                                />
-                            </Grid>
-                            <Grid size={{ xs: 3 }}>
-                                <CustomSelectInput
-                                    label="Object key 4"
-                                    placeholder="Object key 4"
-                                    disabled
-                                    options={[]}
-                                    value={undefined}
-                                    onChange={() => { }}
-                                />
-                            </Grid>
+                                <Grid size={{ xs: 3 }}>
+                                    <CustomSelectInput
+                                        label="Select XOps"
+                                        placeholder="XOps"
+                                        options={[
+                                            { value: "Commercial", label: "Commercial" },
+                                            { value: "Consumer", label: "Consumer" },
+                                            { value: "Customer Development", label: "Customer Development" },
+                                            { value: "Customer Operations", label: "Customer Operations" },
+                                            { value: "People", label: "People" },
+                                            { value: "Supply Chat & R&D", label: "Supply Chat & R&D" },
+                                            { value: "Unknown", label: "Unknown" },
+                                        ]}
+                                        value={xops}
+                                        onChange={(value) => setXops(value != null ? String(value) : "")}
+                                    />
+                                </Grid>
+                                <Grid size={{ xs: 3 }}>
+                                    <CustomSelectInput
+                                        label="Object key 2"
+                                        placeholder="Object key 2"
+                                        disabled
+                                        options={[]}
+                                        value={undefined}
+                                        onChange={() => { }}
+                                    />
+                                </Grid>
+                                <Grid size={{ xs: 3 }}>
+                                    <CustomSelectInput
+                                        label="Object key 3"
+                                        placeholder="Object key 3"
+                                        disabled
+                                        options={[]}
+                                        value={undefined}
+                                        onChange={() => { }}
+                                    />
+                                </Grid>
+                                <Grid size={{ xs: 3 }}>
+                                    <CustomSelectInput
+                                        label="Object key 4"
+                                        placeholder="Object key 4"
+                                        disabled
+                                        options={[]}
+                                        value={undefined}
+                                        onChange={() => { }}
+                                    />
+                                </Grid>
 
 
-                            <Grid size={{ xs: 12 }}>
-                                <Grid spacing={40} container>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Metadata Where"
-                                            placeholder="Not Available"
-                                            multiline
-                                            rows={5}
-                                            value={metaWhereRead}
-                                            readOnly
-                                            onChange={() => { }}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
+                                <Grid size={{ xs: 12 }}>
+                                    <Grid spacing={40} container>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Metadata Where"
+                                                placeholder="Not Available"
+                                                multiline
+                                                rows={5}
+                                                value={metaWhereRead}
+                                                readOnly
+                                                onChange={() => { }}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Metadata Where"
+                                                placeholder="Metadata Where"
+                                                multiline
+                                                rows={5}
+                                                value={metaWhereEdit}
+                                                onChange={(e) => setMetaWhereEdit(e.target.value)}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
                                     </Grid>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Metadata Where"
-                                            placeholder="Metadata Where"
-                                            multiline
-                                            rows={5}
-                                            value={metaWhereEdit}
-                                            onChange={(e) => setMetaWhereEdit(e.target.value)}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
+                                </Grid>
+                                <Grid size={{ xs: 12 }}>
+                                    <Grid spacing={40} container>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Metadata Join"
+                                                placeholder="Not Available"
+                                                multiline
+                                                rows={5}
+                                                value={metaJoinRead}
+                                                readOnly
+                                                onChange={() => { }}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Metadata Join"
+                                                placeholder="Metadata Join"
+                                                multiline
+                                                rows={5}
+                                                value={metaJoinEdit}
+                                                onChange={(e) => setMetaJoinEdit(e.target.value)}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid size={{ xs: 12 }}>
+                                    <Grid spacing={40} container>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Metadata Filter"
+                                                placeholder="Not Available"
+                                                multiline
+                                                rows={5}
+                                                value={metaFilterRead}
+                                                readOnly
+                                                onChange={() => { }}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid size={{ xs: 6 }}>
+                                            <CustomTextInput
+                                                label="Advanced Filters"
+                                                placeholder="Advanced Filters"
+                                                multiline
+                                                rows={5}
+                                                value={metaFilterEdit}
+                                                onChange={(e) => setMetaFilterEdit(e.target.value)}
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
+                                                        "&.MuiInputBase-multiline": { padding: "0px" },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid size={{ xs: 12 }}>
-                                <Grid spacing={40} container>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Metadata Join"
-                                            placeholder="Not Available"
-                                            multiline
-                                            rows={5}
-                                            value={metaJoinRead}
-                                            readOnly
-                                            onChange={() => { }}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
-                                    </Grid>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Metadata Join"
-                                            placeholder="Metadata Join"
-                                            multiline
-                                            rows={5}
-                                            value={metaJoinEdit}
-                                            onChange={(e) => setMetaJoinEdit(e.target.value)}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid size={{ xs: 12 }}>
-                                <Grid spacing={40} container>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Metadata Filter"
-                                            placeholder="Not Available"
-                                            multiline
-                                            rows={5}
-                                            value={metaFilterRead}
-                                            readOnly
-                                            onChange={() => { }}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
-                                    </Grid>
-                                    <Grid size={{ xs: 6 }}>
-                                        <CustomTextInput
-                                            label="Advanced Filters"
-                                            placeholder="Advanced Filters"
-                                            multiline
-                                            rows={5}
-                                            value={metaFilterEdit}
-                                            onChange={(e) => setMetaFilterEdit(e.target.value)}
-                                            sx={{
-                                                "& .MuiOutlinedInput-root": {
-                                                    "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                    "&.MuiInputBase-multiline": { padding: "0px" },
-                                                },
-                                            }}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
                         </Box>
                     </Card>
                 </Grid>

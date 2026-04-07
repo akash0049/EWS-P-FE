@@ -1,4 +1,26 @@
 .MuiPaper-root {
+    .MuiTableContainer-root {
+        .MuiTable-root {
+            .MuiTableHead-root {
+                .MuiTableRow-root {
+                    .MuiTableCell-root {
+                        .MuiCollapse-root .MuiCollapse-wrapper .MuiCollapse-wrapperInner .MuiFormControl-root .MuiInputBase-root {
+                            font-size: clamp(9px, 11px, 13px);
+                            text-transform: none;
+
+                            .MuiInputAdornment-root {
+                                .MuiIconButton-root .MuiSvgIcon-root {
+                                    height: 16px;
+                                    width: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .MuiList-root {
         .MuiMenuItem-root {
             font-size: clamp(9px, 11px, 13px);

@@ -90,7 +90,7 @@ const Demands = () => {
             `}</style>
 
             {/* ── Create New Demand Dialog ── */}
-            {createDemandOpen && 
+            {createDemandOpen &&
                 <CreateNewDemand
                     open={createDemandOpen}
                     onClose={() => setCreateDemandOpen(false)}

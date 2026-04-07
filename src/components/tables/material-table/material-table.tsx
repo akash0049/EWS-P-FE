@@ -5,17 +5,14 @@ import {
     type MRT_TableOptions,
     MRT_ToggleFiltersButton,
     MRT_ShowHideColumnsButton,
-    MRT_ToggleFullScreenButton,
+    MRT_ToggleFullScreenButton
 } from 'material-react-table';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
-import { alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import { Search } from '@mui/icons-material';
-
+import CustomSearchInput from '../../inputs/search-input/search-input';
 import './material-table.scss';
 
 export interface GenericTableProps<TData extends Record<string, any> = Record<string, any>> {
@@ -33,7 +30,7 @@ export interface GenericTableProps<TData extends Record<string, any> = Record<st
 
 /** Shared small button sx for Previous / Next */
 const navBtnSx = (disabled: boolean) => ({
-    fontSize: 'clamp(10px, 12px, 14px)',
+    fontSize: '0.8rem',
     minWidth: 'auto',
     px: 1.5,
     height: '26px',
@@ -97,7 +94,7 @@ export default function GenericTable<TData extends Record<string, any> = Record<
             sx: {
                 backgroundColor: '#FFFFFF',
                 color: '#404040',
-                fontSize: 'clamp(9px, 11px, 13px)',
+                fontSize: 'clamp(10px, 12px, 14px)',
                 fontWeight: 600,
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
@@ -120,121 +117,13 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                 py: 1.2,
             },
         },
-
         /* ── Column-level filter inputs (text) ── */
         muiFilterTextFieldProps: {
-            variant: 'standard',
-            sx: {
-                /* wrapper input root */
-                '& .MuiInputBase-root': {
-                    height: '28px',
-                    fontSize: 'clamp(8px, 10px, 12px)',
-                    fontWeight: 500,
-                    borderRadius: '6px',
-                },
-                /* native <input> inner padding + font */
-                '& .MuiInputBase-input': {
-                    padding: '3px 8px',
-                    fontSize: 'clamp(8px, 10px, 12px)',
-                    fontWeight: 500,
-                },
-                /* default border */
-                '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'rgba(0,0,0,0.18)',
-                },
-                /* hover */
-                '& .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#005EEF',
-                },
-                /* focused */
-                '& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#005EEF',
-                    borderWidth: '1.5px',
-                },
-                /* clear icon */
-                '& .MuiInputAdornment-root svg': {
-                    fontSize: '14px',
-                    color: 'text.secondary',
-                },
-            },
+            variant: 'standard'
         },
         /* ── Column-level filter select (select / multi-select variants) ── */
         muiFilterSelectProps: {
-            variant: 'standard',
-            MenuProps: {
-                PaperProps: {
-                    elevation: 4,
-                    sx: {
-                        borderRadius: '6px',
-                        mt: '4px',
-                    },
-                },
-                sx: {
-                    '& .MuiMenuItem-root': {
-                        fontSize: 'clamp(9px, 11px, 13px)',
-                        fontWeight: 500,
-                        px: 1.5,
-                        py: '6px',
-                        minHeight: '28px',
-                        lineHeight: 1.4,
-                        transition: 'background-color 0.15s',
-                        '&:hover': {
-                            backgroundColor: 'action.hover',
-                        },
-                        '&.Mui-selected': {
-                            backgroundColor: 'primary.main',
-                            color: 'primary.contrastText',
-                            '&:hover': {
-                                backgroundColor: 'primary.dark',
-                            },
-                        },
-                        '&.Mui-selected.Mui-focusVisible': {
-                            backgroundColor: 'primary.main',
-                        },
-                    },
-                },
-            },
-            sx: {
-                minHeight: '28px',
-                fontSize: 'clamp(9px, 11px, 13px)',
-                fontWeight: 500,
-                cursor: 'pointer',
-                width: '100%',
-                '& .MuiSelect-select': {
-                    padding: '3px 8px',
-                    fontSize: 'clamp(9px, 11px, 13px)',
-                    fontWeight: 500,
-                    lineHeight: '22px',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '4px',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                },
-                '& .MuiInput-input': {
-                    cursor: 'pointer',
-                },
-                '& .MuiChip-root': {
-                    height: '18px',
-                    fontSize: 'clamp(9px, 11px, 13px)',
-                    borderRadius: '4px',
-                    backgroundColor: 'rgba(0, 94, 239, 0.1)',
-                    color: '#005EEF',
-                    margin: 0,
-                },
-                '& .MuiChip-label': {
-                    px: '6px',
-                    py: 0,
-                    fontWeight: 600,
-                },
-                '& .MuiChip-deleteIcon': {
-                    fontSize: 'clamp(9px, 11px, 13px)',
-                    color: '#005EEF',
-                    '&:hover': {
-                        color: '#0047B3',
-                    },
-                },
-            },
+            variant: 'standard'
         },
         /* ── Top toolbar container ── */
         muiTopToolbarProps: {
@@ -261,10 +150,8 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                     },
                     '& svg': { fontSize: '18px' },
                 },
-
             },
         },
-        /* ── Toolbar internal actions: exclude default search toggle ── */
         renderToolbarInternalActions: ({ table }) => (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
                 <MRT_ToggleFiltersButton table={table} />
@@ -272,42 +159,15 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                 <MRT_ToggleFullScreenButton table={table} />
             </Box>
         ),
-        /* ── Custom global search input (styled like CustomSearchInput) ── */
-        renderTopToolbarCustomActions: ({ table }) => {
-            return (
-                <Box
-                    sx={{
-                        width: '20%',
-                        height: '35px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1,
-                        bgcolor: 'action.hover',
-                        borderRadius: 1,
-                        px: 1.5,
-                        py: 0.5,
-                        transition: 'all 0.2s',
-                        border: '1px solid transparent',
-                        '&:focus-within': {
-                            bgcolor: 'background.paper',
-                            borderColor: 'primary.main',
-                            boxShadow: (theme: any) => `0 0 0 3px ${alpha(theme.palette.primary.main, 0.1)}`,
-                        },
-                    }}
-                >
-                    <Search sx={{ fontSize: 18, color: 'text.secondary' }} />
-                    <InputBase
-                        placeholder={searchPlaceholder}
-                        value={table.getState().globalFilter ?? ''}
-                        onChange={(e) => table.setGlobalFilter(e.target.value)}
-                        sx={{
-                            flex: 1,
-                            fontSize: '0.8rem',
-                        }}
-                    />
-                </Box>
-            );
-        },
+        renderTopToolbarCustomActions: ({ table }) => (
+            <>
+                <CustomSearchInput
+                    placeholder={searchPlaceholder}
+                    value={table.getState().globalFilter ?? ''}
+                    onChange={(value) => table.setGlobalFilter(value)}
+                />
+            </>
+        ),
         renderBottomToolbar: ({ table }) => {
             const { pageIndex, pageSize } = table.getState().pagination;
             const totalRows = table.getFilteredRowModel().rows.length;
@@ -342,7 +202,7 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                 >
                     {/* ── Left: Rows per page ── */}
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Typography sx={{ fontSize: 'clamp(10px, 12px, 14px)', color: 'text.secondary', whiteSpace: 'nowrap' }}>
+                        <Typography sx={{ fontSize: '0.8rem', color: 'text.secondary', whiteSpace: 'nowrap' }}>
                             Rows per page:
                         </Typography>
                         <Select
@@ -350,14 +210,14 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                             value={pageSize}
                             onChange={(e) => table.setPageSize(Number(e.target.value))}
                             sx={{
-                                fontSize: 'clamp(10px, 12px, 14px)',
+                                fontSize: '0.8rem',
                                 height: '26px',
-                                '& .MuiSelect-select': { py: '3px', fontSize: 'clamp(10px, 12px, 14px)' },
+                                '& .MuiSelect-select': { py: '3px', fontSize: '0.8rem' },
                                 '& .MuiOutlinedInput-notchedOutline': { borderColor: 'divider' },
                             }}
                         >
                             {[10, 25, 50].map((size) => (
-                                <MenuItem key={size} value={size} sx={{ fontSize: 'clamp(10px, 12px, 14px)' }}>
+                                <MenuItem key={size} value={size} sx={{ fontSize: '0.8rem' }}>
                                     {size}
                                 </MenuItem>
                             ))}
@@ -365,7 +225,7 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                     </Box>
 
                     {/* ── Center: Showing X to Y of Z ── */}
-                    <Typography sx={{ fontSize: 'clamp(10px, 12px, 14px)', color: 'text.secondary', fontWeight: 500 }}>
+                    <Typography sx={{ fontSize: '0.8rem', color: 'text.secondary', fontWeight: 500 }}>
                         Showing {from} to {to} of {totalRows} results
                     </Typography>
 
@@ -390,7 +250,7 @@ export default function GenericTable<TData extends Record<string, any> = Record<
                                     variant={'outlined'}
                                     onClick={() => table.setPageIndex(page)}
                                     sx={{
-                                        fontSize: 'clamp(10px, 12px, 14px)',
+                                        fontSize: '0.8rem',
                                         minWidth: '26px',
                                         width: '26px',
                                         height: '26px',
@@ -423,14 +283,14 @@ export default function GenericTable<TData extends Record<string, any> = Record<
         muiToolbarAlertBannerProps: {
             sx: {
                 '& .MuiAlert-message': {
-                    fontSize: 'clamp(10px, 12px, 14px)',
+                    fontSize: 'clamp(9px, 11px, 13px)',
                     fontWeight: 500,
                 },
                 '& .MuiChip-label': {
-                    fontSize: 'clamp(10px, 12px, 14px)',
+                    fontSize: 'clamp(9px, 11px, 13px)',
                 },
                 '& .MuiButton-root': {
-                    fontSize: 'clamp(10px, 12px, 14px)',
+                    fontSize: '0.75rem',
                     padding: '2px 8px',
                     minWidth: 'auto',
                     textTransform: 'none',

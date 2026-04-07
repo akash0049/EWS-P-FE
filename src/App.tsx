@@ -1,25 +1,18 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
-import AppLayout from './components/layout/layout';
-import Demands from './pages/demands/demands';
-import HighLevelDemand from './pages/high-level-demand/high-level-demand';
-import UserRule from './pages/user-rule/user-rule';
-import Translator from './pages/translator/translator';
-import Annexure from './pages/annexure/annexure';
+import AppRouter from './routes/router';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './theme';
+import { MsalProvider } from '@azure/msal-react';
+import { msalInstance } from './config/auth-config';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<Demands />} />
-          <Route path="/:demandId/high-level-demand" element={<HighLevelDemand />} />
-          <Route path="/:demandId/user-rule" element={<UserRule />} />
-          <Route path="/translator" element={<Translator />} />
-          <Route path="/annexure" element={<Annexure />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <MsalProvider instance={msalInstance}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppRouter />
+      </ThemeProvider>
+    </MsalProvider>
   );
 }
 

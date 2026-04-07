@@ -55,7 +55,19 @@ export const COLUMNS: MRT_ColumnDef<Demand>[] = [
     {
         header: "Demand Name",
         accessorKey: "name",
-        size: 200
+        size: 200,
+        Cell: ({ row }) => (
+            <Typography
+                sx={{
+                    whiteSpace: 'nowrap',
+                    cursor: 'default',
+                    fontSize: 'clamp(9px, 11px, 13px)',
+                    fontWeight: 500
+                }}
+            >
+                {row.original.name}
+            </Typography>
+        ),
     },
     {
         header: "Status",
