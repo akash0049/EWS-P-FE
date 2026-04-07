@@ -1,30 +1,14 @@
 import { useState, useEffect } from "react";
-import { Box, Drawer, Typography, Button, Divider, Link } from "@mui/material";
+import { Box, Drawer, Typography, Button, Divider } from "@mui/material";
 import CustomSelectInput from "../../../components/inputs/select-input/select-input";
 import CustomTextInput from "../../../components/inputs/text-input/text-input";
 import CustomSnackbar from "../../../components/snackbar/custom-snackbar";
+import { JIRA_ID_LIST, USERS_LIST } from '../constants/data'
 
 interface Props {
     open: boolean;
     toggleDrawer: (open: boolean) => void;
 }
-
-const JIRA_ID_LIST = [
-    { value: "DDA-890", label: "DDA-890" },
-    { value: "DDA-1024", label: "DDA-1024" },
-    { value: "DDA-3465", label: "DDA-3465" },
-];
-
-const USERS_LIST = [
-    { value: "u1", label: "Akash Mahajan" },
-    { value: "u2", label: "John Doe" },
-    { value: "u3", label: "Jane Smith" },
-    { value: "u4", label: "Alice Johnson" },
-    { value: "u5", label: "Bob Brown" },
-    { value: "u6", label: "Charlie Davis" },
-    { value: "u7", label: "Diana Evans" },
-    { value: "u8", label: "Ethan Foster" },
-];
 
 const DemandDetails = ({ open, toggleDrawer }: Props) => {
     const [jiraId, setJiraId] = useState("");
@@ -38,6 +22,14 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
     const [functionalSME, setFunctionalSME] = useState("");
     const [resolverGroupName, setResolverGroupName] = useState("");
     const [userGroup, setUserGroup] = useState("");
+    const [productDevOpsEmail, setProductDevOpsEmail] = useState("");
+    const [groupEmail, setGroupEmail] = useState("");
+    const [requestedBy, setRequestedBy] = useState("");
+    const [productName, setProductName] = useState("");
+    const [geoScope, setGeoScope] = useState("");
+    const [dnaTeam, setDnaTeam] = useState("");
+    const [dnaSubTeam, setDnaSubTeam] = useState("");
+
     const [showSuccess, setShowSuccess] = useState(false);
     const [showError, setShowError] = useState(false);
 
@@ -155,21 +147,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                 overflowY: "auto",
                 flex: 1
             }}>
-                <Link
-                    href="#"
-                    underline="hover"
-                    sx={{
-                        color: "primary.main",
-                        fontWeight: 500,
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1,
-                        fontSize: '0.8rem'
-                    }}
-                >
-                    Click here to add more details by Engagement Team
-                </Link>
-
                 <CustomSelectInput
                     label="JIRA ID"
                     placeholder="Select a JIRA ID"
@@ -187,14 +164,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     multiline
                     rows={2}
                     readOnly
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomTextInput
@@ -205,14 +174,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     onChange={(e) => setDemandDescription(e.target.value)}
                     multiline
                     rows={2}
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomTextInput
@@ -221,14 +182,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     required
                     value={market}
                     onChange={(e) => setMarket(e.target.value)}
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomTextInput
@@ -239,14 +192,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     onChange={(e) => setUsecase(e.target.value)}
                     multiline
                     rows={2}
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomTextInput
@@ -257,14 +202,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     onChange={(e) => setBenefits(e.target.value)}
                     multiline
                     rows={2}
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomSelectInput
@@ -300,14 +237,6 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     required
                     value={resolverGroupName}
                     onChange={(e) => setResolverGroupName(e.target.value)}
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
                 />
 
                 <CustomTextInput
@@ -317,14 +246,55 @@ const DemandDetails = ({ open, toggleDrawer }: Props) => {
                     value={userGroup}
                     onChange={(e) => setUserGroup(e.target.value)}
                     readOnly
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 2,
-                            bgcolor: "#f8fafc",
-                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                        },
-                    }}
+                />
+                <CustomTextInput
+                    label="Product DevOps Email"
+                    placeholder="Enter Product DevOps Email"
+                    required
+                    value={productDevOpsEmail}
+                    onChange={(e) => setProductDevOpsEmail(e.target.value)}
+                />
+                <CustomTextInput
+                    label="Group Email"
+                    placeholder="Enter Group Email"
+                    required
+                    value={groupEmail}
+                    onChange={(e) => setGroupEmail(e.target.value)}
+                />
+                <CustomTextInput
+                    label="Requested By"
+                    placeholder="Enter Requested By"
+                    required
+                    value={requestedBy}
+                    onChange={(e) => setRequestedBy(e.target.value)}
+                />
+                <CustomTextInput
+                    label="Product Name"
+                    placeholder="Enter Product Name"
+                    required
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
+                />
+                <CustomTextInput
+                    label="Geo Scope"
+                    placeholder="Enter Geo Scope"
+                    required
+                    value={geoScope}
+                    onChange={(e) => setGeoScope(e.target.value)}
+                />
+                <CustomTextInput
+                    label="Dna Team"
+                    placeholder="Enter Dna team"
+                    required
+                    value={dnaTeam}
+                    onChange={(e) => setDnaTeam(e.target.value)}
+                />
+                <CustomTextInput
+                    label="DnaSub Team"
+                    placeholder="Enter Dna Sub Team"
+                    required
+                    value={dnaSubTeam}
+                    onChange={(e) => setDnaSubTeam(e.target.value)}
                 />
             </Box>
 

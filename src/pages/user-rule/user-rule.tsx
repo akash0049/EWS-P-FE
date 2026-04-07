@@ -56,7 +56,7 @@ const UserRule = () => {
                 <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
                     <CustomIconButton
                         size="medium"
-                        title="Click here to Configure Rules"
+                        title="Click here to Configure Objects"
                         icon={<ArrowCircleLeft fontSize="medium" />}
                         onClick={() => navigate("/1/high-level-demand")}
                     />

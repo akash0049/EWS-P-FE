@@ -45,7 +45,7 @@ const Demands = () => {
                     >
                         Demand Selection
                     </Typography>
-                    <Typography variant="caption" color="text.secondary" sx={{ mt: 0.25 }}>
+                    <Typography variant="caption" color="text.secondary">
                         Engagement Initiation - Capture High Level Demand - Capture Demand Details
                     </Typography>
                 </Box>

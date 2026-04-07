@@ -429,8 +429,7 @@ const CustomSelectInput = forwardRef<HTMLDivElement, CustomSelectInputProps>(
                     <Typography
                         sx={{
                             mt: "6px",
-                            fontSize: "0.6rem",
-                            lineHeight: 1.45,
+                            fontSize: "clamp(8px, 10px, 12px)",
                             color: error ? "error.main" : "text.secondary",
                         }}
                     >
