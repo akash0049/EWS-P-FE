@@ -1,9 +1,4 @@
-import { useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
-import { AuthenticatedTemplate, useMsal } from '@azure/msal-react';
-import { InteractionStatus } from "@azure/msal-browser";
-import { loginRequest } from '../config/auth-config';
 
 import AppLayout from '../components/layout/layout';
 import Demands from '../pages/demands/demands';
@@ -15,25 +10,8 @@ import Annexure from '../pages/annexure/annexure';
 import { APP_ROUTES } from './app-routes';
 
 function AppRouter() {
-    const { instance, accounts, inProgress } = useMsal();
-
-    const handleSSOLogin = async () => {
-        try {
-            await instance.loginRedirect(loginRequest);
-        } catch (error) {
-            console.error(`SSO Login Request Failed: ${error}`);
-        }
-    }
-
-    // useEffect(() => {
-    //     if (inProgress === InteractionStatus.None && accounts.length === 0) {
-    //         handleSSOLogin();
-    //     }
-    // }, [inProgress, accounts]);
-
     return (
         <BrowserRouter>
-            {/* <AuthenticatedTemplate> */}
             <Routes>
                 <Route path={APP_ROUTES.DEMANDS} element={<AppLayout />}>
                     <Route index element={<Demands />} />
@@ -43,7 +21,6 @@ function AppRouter() {
                     <Route path={APP_ROUTES.ANNEXURE} element={<Annexure />} />
                 </Route>
             </Routes>
-            {/* </AuthenticatedTemplate> */}
         </BrowserRouter>
     );
 }
