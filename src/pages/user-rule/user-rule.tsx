@@ -26,6 +26,7 @@ const UserRule = () => {
     const [showAlert, setShowAlert] = useState({ open: false, success: false, message: "" });
 
     const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+    const [targetRuleId, setTargetRuleId] = useState<string | null>(null);
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, height: "100%" }}>
@@ -108,7 +109,10 @@ const UserRule = () => {
                                     startIcon={<CalendarCheck size={16} />}
                                     disabled={Object.keys(rowSelection).length === 0}
                                     sx={{ fontSize: '11px', height: '30px', px: 1.5, textTransform: 'none' }}
-                                    onClick={() => setOpenScheduleRule(true)}
+                                    onClick={() => {
+                                        setTargetRuleId(null);
+                                        setOpenScheduleRule(true);
+                                    }}
                                 >
                                     Schedule Rule
                                 </Button>
@@ -230,7 +234,10 @@ const UserRule = () => {
                                     <Tooltip arrow placement="top" title="Edit">
                                         <IconButton
                                             size="small"
-                                            onClick={() => table.setEditingRow(row)}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                table.setEditingRow(row);
+                                            }}
                                             sx={{
                                                 width: '28px',
                                                 height: '28px',
@@ -253,8 +260,9 @@ const UserRule = () => {
                                     <Tooltip arrow placement="top" title="Schedule">
                                         <IconButton
                                             size="small"
-                                            onClick={() => {
-                                                setRowSelection({ [row.original.userRuleId]: true });
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setTargetRuleId(row.original.userRuleId.toString());
                                                 setOpenScheduleRule(true);
                                             }}
                                             sx={{
@@ -279,7 +287,8 @@ const UserRule = () => {
                                     <Tooltip arrow placement="top" title="Delete">
                                         <IconButton
                                             size="small"
-                                            onClick={() => {
+                                            onClick={(e) => {
+                                                e.stopPropagation();
                                                 const newData = tableData.filter((item: any) => item.userRuleId !== row.original.userRuleId);
                                                 setTableData(newData);
 
@@ -357,14 +366,20 @@ const UserRule = () => {
             {openScheduleRule &&
                 <ScheduleRule
                     open={openScheduleRule}
-                    onClose={() => setOpenScheduleRule(false)}
+                    onClose={() => {
+                        setOpenScheduleRule(false);
+                        setTargetRuleId(null);
+                    }}
                     onSubmit={() => {
-                        const selectedIds = Object.keys(rowSelection);
+                        const selectedIds = targetRuleId ? [targetRuleId] : Object.keys(rowSelection);
                         const newData = tableData.map((row: any) =>
                             selectedIds.includes(row.userRuleId.toString()) ? { ...row, scheduled: true } : row
                         );
                         setTableData(newData);
-                        setRowSelection({});
+                        if (!targetRuleId) {
+                            setRowSelection({});
+                        }
+                        setTargetRuleId(null);
                         setShowAlert({ open: true, success: true, message: "Rule(s) scheduled successfully!" });
                     }}
                 />

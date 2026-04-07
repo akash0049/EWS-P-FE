@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     MaterialReactTable,
     useMaterialReactTable,
@@ -12,7 +13,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import { Upload } from '@mui/icons-material';
 import CustomSearchInput from '../../inputs/search-input/search-input';
+import BulkUpload from './bulk-upload';
 import './material-table.scss';
 
 export interface GenericTableProps<TData extends Record<string, any> = Record<string, any>> {
@@ -22,6 +27,8 @@ export interface GenericTableProps<TData extends Record<string, any> = Record<st
     isLoading?: boolean;
     isRefetching?: boolean;
     columnVisibility?: Record<string, boolean>;
+    enableBulkUpload?: boolean;
+    onBulkUploadSubmit?: (data: Record<string, any>[]) => void;
     /**
      * Optional override or extend of any table options
      */
@@ -48,8 +55,12 @@ export default function GenericTable<TData extends Record<string, any> = Record<
     isLoading = false,
     isRefetching = false,
     columnVisibility = {},
+    enableBulkUpload = false,
+    onBulkUploadSubmit,
     options = {},
 }: GenericTableProps<TData>) {
+    const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
+
     const table = useMaterialReactTable({
         columns,
         data,
@@ -154,6 +165,13 @@ export default function GenericTable<TData extends Record<string, any> = Record<
         },
         renderToolbarInternalActions: ({ table }) => (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                {enableBulkUpload && onBulkUploadSubmit && (
+                    <Tooltip arrow placement="top" title="Bulk Upload">
+                        <IconButton onClick={() => setBulkUploadOpen(true)}>
+                            <Upload />
+                        </IconButton>
+                    </Tooltip>
+                )}
                 <MRT_ToggleFiltersButton table={table} />
                 <MRT_ShowHideColumnsButton table={table} />
                 <MRT_ToggleFullScreenButton table={table} />
@@ -300,5 +318,17 @@ export default function GenericTable<TData extends Record<string, any> = Record<
         ...options,
     } as MRT_TableOptions<TData>);
 
-    return <MaterialReactTable table={table} />;
+    return (
+        <>
+            <MaterialReactTable table={table} />
+            {enableBulkUpload && onBulkUploadSubmit && (
+                <BulkUpload
+                    open={bulkUploadOpen}
+                    onClose={() => setBulkUploadOpen(false)}
+                    columns={columns}
+                    onSubmit={onBulkUploadSubmit}
+                />
+            )}
+        </>
+    );
 }

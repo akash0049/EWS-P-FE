@@ -5,7 +5,8 @@ import {
     Typography,
     Card,
     Button,
-    Chip
+    Chip,
+    Divider
 } from "@mui/material";
 import CustomSelectInput from "../../components/inputs/select-input/select-input";
 import CustomTextInput from "../../components/inputs/text-input/text-input";
@@ -87,7 +88,7 @@ const Translator = () => {
             >
                 <Box>
                     <Typography
-                        variant="h6"
+                        variant="subtitle1"
                         fontWeight={800}
                         letterSpacing="-0.5px"
                         color="text.primary"
@@ -193,7 +194,7 @@ const Translator = () => {
                             </Grid>
                         </Grid>
 
-                        <Box sx={{ height: "1px", bgcolor: "divider", mt: 1, mb: 1, mx: 1 }} />
+                        <Divider />
 
                         <Grid container spacing={2}>
                             <Grid size={{ xs: 12 }}>
@@ -352,7 +353,7 @@ const Translator = () => {
 
 
                                 <Grid size={{ xs: 12 }}>
-                                    <Grid spacing={40} container>
+                                    <Grid spacing={20} container>
                                         <Grid size={{ xs: 6 }}>
                                             <CustomTextInput
                                                 label="Metadata Where"
@@ -362,13 +363,6 @@ const Translator = () => {
                                                 value={metaWhereRead}
                                                 readOnly
                                                 onChange={() => { }}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                         <Grid size={{ xs: 6 }}>
@@ -379,19 +373,12 @@ const Translator = () => {
                                                 rows={5}
                                                 value={metaWhereEdit}
                                                 onChange={(e) => setMetaWhereEdit(e.target.value)}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid size={{ xs: 12 }}>
-                                    <Grid spacing={40} container>
+                                    <Grid spacing={20} container>
                                         <Grid size={{ xs: 6 }}>
                                             <CustomTextInput
                                                 label="Metadata Join"
@@ -401,13 +388,6 @@ const Translator = () => {
                                                 value={metaJoinRead}
                                                 readOnly
                                                 onChange={() => { }}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                         <Grid size={{ xs: 6 }}>
@@ -418,19 +398,12 @@ const Translator = () => {
                                                 rows={5}
                                                 value={metaJoinEdit}
                                                 onChange={(e) => setMetaJoinEdit(e.target.value)}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid size={{ xs: 12 }}>
-                                    <Grid spacing={40} container>
+                                    <Grid spacing={20} container>
                                         <Grid size={{ xs: 6 }}>
                                             <CustomTextInput
                                                 label="Metadata Filter"
@@ -440,13 +413,6 @@ const Translator = () => {
                                                 value={metaFilterRead}
                                                 readOnly
                                                 onChange={() => { }}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                         <Grid size={{ xs: 6 }}>
@@ -457,13 +423,6 @@ const Translator = () => {
                                                 rows={5}
                                                 value={metaFilterEdit}
                                                 onChange={(e) => setMetaFilterEdit(e.target.value)}
-                                                sx={{
-                                                    "& .MuiOutlinedInput-root": {
-                                                        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "primary.main" },
-                                                        "&.MuiInputBase-multiline": { padding: "0px" },
-                                                    },
-                                                }}
                                             />
                                         </Grid>
                                     </Grid>

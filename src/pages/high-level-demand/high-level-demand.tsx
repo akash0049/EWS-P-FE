@@ -4,12 +4,11 @@ import {
     Box,
     Button,
     Typography,
-    Grid,
-    Tooltip
+    Grid
 } from "@mui/material";
 import MaterialTable from "../../components/tables/material-table/material-table";
 import DemandDetails from "./components/demand-details";
-import { ArrowCircleRight, Save, Upload } from "@mui/icons-material";
+import { ArrowCircleRight, Save } from "@mui/icons-material";
 import AddObject from "./components/add-object";
 import CustomIconButton from "../../components/buttons/icon-button/icon-button";
 import CustomSnackbar from "../../components/snackbar/custom-snackbar";
@@ -52,16 +51,7 @@ const HighLevelDemand = () => {
                 </Box>
 
                 <Box sx={{ display: "flex", gap: 1.5, alignItems: "center" }}>
-                    <Tooltip title="Upload objects from Excel / CSV file" arrow placement="top">
-                        <Button
-                            variant="outlined"
-                            startIcon={<Upload fontSize="small" />}
-                            onClick={() => { }}
-                            sx={{ height: 35 }}
-                        >
-                            Bulk Upload
-                        </Button>
-                    </Tooltip>
+
                     <Button
                         variant="contained"
                         startIcon={<BookText size={16} />}
@@ -114,6 +104,18 @@ const HighLevelDemand = () => {
                                         right: ["actions"],
                                     },
                                 },
+                            }}
+                            enableBulkUpload
+                            onBulkUploadSubmit={(data) => {
+                                setTableData((prev) => {
+                                    const newData = [...prev];
+                                    for (const item of data) {
+                                        if (!newData.some(existing => (existing as any).objectKey === item.objectKey)) {
+                                            newData.push(item);
+                                        }
+                                    }
+                                    return newData;
+                                });
                             }}
                         />
                     </Grid>
